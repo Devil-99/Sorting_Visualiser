@@ -36,7 +36,7 @@ def view_sorting(array,max_pass):
     running = True
 
     while(running):
-        clock.tick(80)
+        clock.tick(10)
         screen.fill((0,0,0))
         
         for event in pygame.event.get():
@@ -67,9 +67,23 @@ def bubble_sort(array):
         for j in range(i+1,size):
             if array[j] < array[i]:
                 array[i],array[j]=array[j],array[i]
-
         load_item_coordinates(array,print_start_index,gap_between_lines)
         max_pass+=1
+
+    return array
+
+def insertion_sort(array):
+    global max_pass
+    n=len(array)
+
+    for i in range(1,n):
+        j=i
+        while(j>0 and array[j]<array[j-1]):
+            array[j],array[j-1]=array[j-1],array[j]
+            j-=1
+        load_item_coordinates(array,print_start_index,gap_between_lines)
+        max_pass+=1
+
     return array
 
 # Driver code goes here
@@ -81,8 +95,9 @@ def driver():
 
     load_item_coordinates(array,print_start_index,gap_between_lines)
 
-    sorted_array = bubble_sort(array)
-    print(sorted_array)
+    # bubble_sort(array)
+
+    insertion_sort(array)
 
     view_sorting(array,max_pass-1)
 
